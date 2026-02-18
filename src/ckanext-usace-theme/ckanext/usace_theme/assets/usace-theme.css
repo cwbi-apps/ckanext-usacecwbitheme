@@ -1,0 +1,65 @@
+/* USACE Branding for CKAN
+   Color palette derived from GeoPortal Server USACE theme (gps-c 6ea32708) */
+
+/* Header */
+.masthead {
+  background-color: #cccccc;
+}
+
+.account-masthead {
+  background-color: rgb(24, 24, 27);
+}
+
+/* Logo and branding */
+.usace-logo {
+  width: 56px;
+  height: 56px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.usace-brand {
+  font-weight: bold;
+  font-size: 16px;
+  color: #404040;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.usace-title {
+  font-size: 16px;
+  color: #404040;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar .logo:hover {
+  text-decoration: none;
+}
+
+/* Navigation */
+.navbar .nav > li > a {
+  color: #404040;
+}
+
+/* Search bar */
+.site-search .module-content {
+  background-color: rgb(24, 24, 27);
+}
+
+/* Sign-in / account buttons */
+.account-masthead .account ul li a {
+  background-color: rgb(30, 58, 138);
+}
+
+/* Footer */
+.site-footer {
+  background-color: rgb(24, 24, 27);
+}
