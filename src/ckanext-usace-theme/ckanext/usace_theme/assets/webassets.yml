@@ -1,4 +1,0 @@
-usace-theme-css:
-  output: ckanext-usace-theme/%(version)s_usace-theme.css
-  contents:
-    - usace-theme.css

@@ -1,0 +1,74 @@
+{% extends "page.html" %}
+
+{% block subtitle %}Civil Works Data Catalog{% endblock %}
+
+{% block toolbar %}{% endblock %}
+{% block actions %}{% endblock %}
+
+{% block content %}
+  {# Hero — full-bleed, no Bootstrap container #}
+  <section class="cwbi-hero">
+    <div class="cwbi-hero-inner">
+      <h1>Civil Works Data Catalog</h1>
+      <p>
+        The Data Catalog contributes to visibility and accessibility by systematically
+        organizing and indexing data assets across CWBI modules.
+      </p>
+      <form class="cwbi-search-form" action="/dataset" method="GET">
+        <input
+          type="text"
+          name="q"
+          placeholder="Search data assets..."
+          aria-label="Search data assets"
+        >
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  {# Feature cards #}
+  <section class="cwbi-cards-section">
+    <div class="cwbi-cards-grid">
+
+      <div class="cwbi-card">
+        <div class="cwbi-card-header">
+          <span class="cwbi-card-header-icon">&#128269;</span>
+        </div>
+        <div class="cwbi-card-body">
+          <div class="cwbi-card-title">Data Discovery</div>
+          <div class="cwbi-card-subtitle">
+            Find and access relevant data assets across CWBI modules to support
+            AI applications and operational decision-making.
+          </div>
+        </div>
+      </div>
+
+      <div class="cwbi-card">
+        <div class="cwbi-card-header">
+          <span class="cwbi-card-header-icon">&#128202;</span>
+        </div>
+        <div class="cwbi-card-body">
+          <div class="cwbi-card-title">Visibility</div>
+          <div class="cwbi-card-subtitle">
+            A centralized repository where data sources are documented, making
+            it easier to discover and access relevant data efficiently.
+          </div>
+        </div>
+      </div>
+
+      <div class="cwbi-card">
+        <div class="cwbi-card-header">
+          <span class="cwbi-card-header-icon">&#127759;</span>
+        </div>
+        <div class="cwbi-card-body">
+          <div class="cwbi-card-title">VAULTIS Framework</div>
+          <div class="cwbi-card-subtitle">
+            Supporting the Visibility and Accessibility principles of the
+            VAULTIS framework through systematic data organization.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+{% endblock %}

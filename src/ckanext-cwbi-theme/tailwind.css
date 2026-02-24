@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CKAN Bootstrap overrides ────────────────────────────────────────── */
+@layer base {
+  .masthead {
+    background-color: theme('colors.cwbi-navy.500');
+  }
+
+  .account-masthead {
+    background-color: theme('colors.cwbi-black');
+  }
+
+  .site-footer {
+    background-color: theme('colors.cwbi-black');
+  }
+
+  .account-masthead .account ul li a {
+    background-color: theme('colors.logo-blue.500');
+  }
+
+  .navbar .nav > li > a {
+    color: theme('colors.cwbi-teal');
+  }
+}
+
+/* ── Component classes ───────────────────────────────────────────────── */
+@layer components {
+  /* Header logo */
+  .cwbi-logo {
+    @apply h-12 w-auto align-middle mr-3;
+  }
+
+  .cwbi-brand {
+    @apply font-bold text-lg text-white align-middle inline-block;
+  }
+
+  .navbar .logo {
+    @apply flex items-center no-underline;
+  }
+
+  .navbar .logo:hover {
+    @apply no-underline;
+  }
+
+  /* Hero section */
+  .cwbi-hero {
+    @apply flex items-center justify-center py-16 px-5;
+    background: linear-gradient(
+      135deg,
+      theme('colors.cwbi-navy.600') 0%,
+      theme('colors.cwbi-navy.500') 50%,
+      theme('colors.logo-blue.500') 100%
+    );
+    min-height: 420px;
+  }
+
+  .cwbi-hero-inner {
+    @apply text-center w-full max-w-3xl mx-auto;
+  }
+
+  .cwbi-hero h1 {
+    @apply text-white text-4xl font-bold mb-4;
+  }
+
+  .cwbi-hero p {
+    @apply text-lg mb-8;
+    color: theme('colors.cwbi-teal');
+  }
+
+  /* Search form */
+  .cwbi-search-form {
+    @apply flex max-w-2xl mx-auto rounded-lg overflow-hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .cwbi-search-form input[type='text'] {
+    @apply flex-1 px-5 py-4 text-base text-gray-800 border-0 outline-none;
+  }
+
+  .cwbi-search-form button {
+    @apply px-7 py-4 font-bold text-base border-0 cursor-pointer whitespace-nowrap;
+    background-color: theme('colors.cwbi-orange.500');
+    color: theme('colors.cwbi-black');
+    transition: background-color 0.15s;
+  }
+
+  .cwbi-search-form button:hover {
+    background-color: theme('colors.cwbi-orange.600');
+  }
+
+  /* Feature cards */
+  .cwbi-cards-section {
+    @apply py-16 px-5 bg-slate-50;
+  }
+
+  .cwbi-cards-grid {
+    @apply gap-7 max-w-6xl mx-auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .cwbi-card {
+    @apply bg-white rounded-lg overflow-hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .cwbi-card-header {
+    @apply h-20 flex items-center justify-center;
+    background: linear-gradient(
+      135deg,
+      theme('colors.cwbi-navy.600'),
+      theme('colors.logo-blue.500')
+    );
+  }
+
+  .cwbi-card-header-icon {
+    @apply text-4xl;
+    color: theme('colors.cwbi-teal');
+  }
+
+  .cwbi-card-body {
+    @apply p-6;
+  }
+
+  .cwbi-card-title {
+    @apply text-lg font-bold text-gray-800 mb-2;
+  }
+
+  .cwbi-card-subtitle {
+    @apply text-sm leading-relaxed;
+    color: theme('colors.cwbi-navy.400');
+  }
+}

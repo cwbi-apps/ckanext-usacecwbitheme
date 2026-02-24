@@ -1,0 +1,4 @@
+cwbi-theme-css:
+  output: ckanext-cwbi-theme/%(version)s_cwbi-theme.css
+  contents:
+    - cwbi-theme.css
