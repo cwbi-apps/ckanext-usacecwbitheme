@@ -1,39 +1,78 @@
+/*
+ * Canonical theme stylesheet source.
+ *
+ * Run `npm run build:css` to generate
+ * ckanext/cwbi_theme/assets/cwbi-theme.css. Do not edit the generated file.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── CKAN Bootstrap overrides ────────────────────────────────────────── */
+/* CKAN Bootstrap overrides */
 @layer base {
-  .masthead {
-    background-color: theme('colors.cwbi-navy.500');
-  }
-
   .account-masthead {
-    background-color: theme('colors.cwbi-black');
-  }
-
-  .site-footer {
-    background-color: theme('colors.cwbi-black');
+    @apply border-b border-gray-200 bg-white;
   }
 
   .account-masthead .account ul li a {
-    background-color: theme('colors.logo-blue.500');
+    @apply bg-transparent text-gray-900;
   }
 
-  .navbar .nav > li > a {
-    color: theme('colors.cwbi-teal');
+  .account-masthead .account ul li a:hover {
+    @apply bg-transparent text-gray-600;
+  }
+
+  .masthead {
+    @apply border-b border-gray-200 bg-white;
+  }
+
+  .masthead .navigation .nav-pills > li > a,
+  .navbar .nav > li > a,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a {
+    @apply text-sm font-semibold text-gray-900;
+  }
+
+  .masthead .navigation .nav-pills > li > a:hover,
+  .masthead .navigation .nav-pills > li > a:focus,
+  .navbar .nav > li > a:hover,
+  .navbar .nav > li > a:focus,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a:hover,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a:focus {
+    @apply bg-transparent text-gray-600;
+  }
+
+  .masthead .navigation .nav-pills > li.active > a,
+  .masthead .navigation .nav-pills > li.active > a:hover {
+    @apply bg-transparent text-gray-900;
+  }
+
+  .masthead .section.header-search .search-input-group input {
+    @apply border border-gray-200 text-gray-900;
+  }
+
+  .masthead .section.header-search .search-input-group button {
+    @apply border border-l-0 border-gray-200 bg-white text-gray-900;
+  }
+
+  .navbar .logo .cwbi-brand,
+  .site-title {
+    @apply text-gray-900;
+  }
+
+  .site-footer {
+    @apply bg-gray-900;
   }
 }
 
-/* ── Component classes ───────────────────────────────────────────────── */
+/* Theme components */
 @layer components {
-  /* Header logo */
   .cwbi-logo {
-    @apply h-12 w-auto align-middle mr-3;
+    @apply mr-3 h-12 w-auto align-middle;
   }
 
   .cwbi-brand {
-    @apply font-bold text-lg text-white align-middle inline-block;
+    @apply inline-block align-middle text-sm font-semibold text-gray-900;
   }
 
   .navbar .logo {
@@ -44,92 +83,113 @@
     @apply no-underline;
   }
 
-  /* Hero section */
-  .cwbi-hero {
-    @apply flex items-center justify-center py-16 px-5;
-    background: linear-gradient(
-      135deg,
-      theme('colors.cwbi-navy.600') 0%,
-      theme('colors.cwbi-navy.500') 50%,
-      theme('colors.logo-blue.500') 100%
-    );
-    min-height: 420px;
+  .cwbi-home-backdrop {
+    @apply bg-cover bg-center;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76)),
+      url('/Homepage_FullSize.jpeg');
   }
 
-  .cwbi-hero-inner {
-    @apply text-center w-full max-w-3xl mx-auto;
+  .cwbi-page-backdrop {
+    @apply bg-cover bg-center;
+    background-image: var(--cwbi-page-image);
   }
 
-  .cwbi-hero h1 {
-    @apply text-white text-4xl font-bold mb-4;
+  .cwbi-page-heading {
+    @apply border-b px-6 py-6;
+    background-color: rgba(5, 20, 55, 0.82);
+    border-color: rgba(255, 255, 255, 0.32);
   }
 
-  .cwbi-hero p {
-    @apply text-lg mb-8;
-    color: theme('colors.cwbi-teal');
+  .cwbi-home-heading {
+    @apply bg-cover bg-center;
+    background-image:
+      linear-gradient(rgba(5, 20, 55, 0.82), rgba(5, 20, 55, 0.82)),
+      url('/Header_Homepage.jpg');
   }
 
-  /* Search form */
+  .cwbi-page-heading-inner {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .cwbi-page-heading h1 {
+    @apply mb-2 mt-0 text-4xl font-bold tracking-tight text-white;
+  }
+
+  .cwbi-page-heading p {
+    @apply m-0 text-lg leading-8 text-gray-100;
+  }
+
+  .cwbi-primary-link {
+    @apply mt-6 inline-block border border-white px-4 py-2.5 text-sm font-semibold text-white no-underline;
+  }
+
+  .cwbi-primary-link:hover,
+  .cwbi-primary-link:focus {
+    @apply bg-white text-gray-900 no-underline;
+  }
+
   .cwbi-search-form {
-    @apply flex max-w-2xl mx-auto rounded-lg overflow-hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    @apply mt-6 flex max-w-2xl items-center border-b-2 border-white;
   }
 
   .cwbi-search-form input[type='text'] {
-    @apply flex-1 px-5 py-4 text-base text-gray-800 border-0 outline-none;
+    @apply flex-1 border-0 bg-transparent px-0 py-2 text-sm text-white outline-none;
+  }
+
+  .cwbi-search-form input[type='text']::placeholder {
+    @apply text-gray-300;
   }
 
   .cwbi-search-form button {
-    @apply px-7 py-4 font-bold text-base border-0 cursor-pointer whitespace-nowrap;
-    background-color: theme('colors.cwbi-orange.500');
-    color: theme('colors.cwbi-black');
-    transition: background-color 0.15s;
+    @apply cursor-pointer border-0 bg-transparent p-2 text-sm font-semibold text-white;
   }
 
   .cwbi-search-form button:hover {
-    background-color: theme('colors.cwbi-orange.600');
+    @apply text-gray-300;
   }
 
-  /* Feature cards */
+  .cwbi-content-section {
+    @apply bg-white p-6;
+  }
+
+  .cwbi-content-inner {
+    @apply mx-auto max-w-6xl;
+  }
+
   .cwbi-cards-section {
-    @apply py-16 px-5 bg-slate-50;
+    @apply bg-white p-6;
+  }
+
+  .cwbi-home-backdrop .cwbi-cards-section {
+    background-color: rgba(255, 255, 255, 0.44);
+  }
+
+  .cwbi-dataset-backdrop .main {
+    background-color: rgba(255, 255, 255, 0.72);
+    background-image: none;
   }
 
   .cwbi-cards-grid {
-    @apply gap-7 max-w-6xl mx-auto;
-    display: grid;
+    @apply mx-auto grid max-w-6xl gap-6;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
   .cwbi-card {
-    @apply bg-white rounded-lg overflow-hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    @apply block border border-gray-300 p-5 no-underline;
+    background-color: rgba(255, 255, 255, 0.96);
   }
 
-  .cwbi-card-header {
-    @apply h-20 flex items-center justify-center;
-    background: linear-gradient(
-      135deg,
-      theme('colors.cwbi-navy.600'),
-      theme('colors.logo-blue.500')
-    );
-  }
-
-  .cwbi-card-header-icon {
-    @apply text-4xl;
-    color: theme('colors.cwbi-teal');
-  }
-
-  .cwbi-card-body {
-    @apply p-6;
+  .cwbi-card:hover,
+  .cwbi-card:focus {
+    @apply border-gray-400 no-underline;
   }
 
   .cwbi-card-title {
-    @apply text-lg font-bold text-gray-800 mb-2;
+    @apply mb-2 text-sm font-bold text-gray-900;
   }
 
-  .cwbi-card-subtitle {
-    @apply text-sm leading-relaxed;
-    color: theme('colors.cwbi-navy.400');
+  .cwbi-card-text {
+    @apply text-sm leading-relaxed text-gray-600;
   }
 }

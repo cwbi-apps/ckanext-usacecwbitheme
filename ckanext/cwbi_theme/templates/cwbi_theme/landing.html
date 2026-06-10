@@ -1,0 +1,23 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ landing_page.title }}{% endblock %}
+
+{% block toolbar %}{% endblock %}
+{% block actions %}{% endblock %}
+
+{% block content %}
+  <div
+    class="cwbi-page-backdrop"
+    style="--cwbi-page-image: url('/{{ landing_page.banner }}')"
+  >
+    <section class="cwbi-page-heading">
+      <div class="cwbi-page-heading-inner">
+        <h1>{{ landing_page.title }}</h1>
+        <p>{{ landing_page.description }}</p>
+        <a class="cwbi-primary-link" href="{{ h.url_for('dataset.search') }}">
+          Browse datasets
+        </a>
+      </div>
+    </section>
+  </div>
+{% endblock %}

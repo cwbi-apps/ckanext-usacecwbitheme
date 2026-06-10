@@ -1,0 +1,7 @@
+include package.json
+include package-lock.json
+include tailwind.css
+include tailwind.config.cjs
+recursive-include ckanext/cwbi_theme/assets *
+recursive-include ckanext/cwbi_theme/public *
+recursive-include ckanext/cwbi_theme/templates *

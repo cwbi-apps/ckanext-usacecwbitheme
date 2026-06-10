@@ -1,9 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 /** Build config for ckanext-cwbi-theme.
-    Derived from cwbi-hub tailwind.config.js; CJS syntax for Tailwind CLI.
+    Derived from the CWBI Hub Tailwind configuration; CJS syntax for Tailwind CLI.
     Content paths updated to scan CKAN templates. */
 module.exports = {
   content: ['./ckanext/cwbi_theme/templates/**/*.html'],
+  safelist: [
+    'account',
+    'account-masthead',
+    'header-search',
+    'main-navbar',
+    'masthead',
+    'nav',
+    'navbar',
+    'navbar-nav',
+    'navigation',
+    'nav-pills',
+    'search-input-group',
+    'section',
+    'site-footer',
+    'site-title',
+    'cwbi-content-section',
+    'cwbi-content-inner',
+  ],
   corePlugins: {
     preflight: false,  // Bootstrap handles base resets; Tailwind preflight conflicts
   },
@@ -41,6 +59,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    // @tailwindcss/forms omitted — resets conflict with Bootstrap form styling
+    // @tailwindcss/forms omitted because resets conflict with Bootstrap form styling
   ],
 };

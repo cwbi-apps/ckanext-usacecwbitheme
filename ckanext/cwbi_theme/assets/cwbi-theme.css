@@ -1,236 +1,720 @@
 /*
- * CWBI Theme — matches the CWBI Hub (cwbi.sec.usace.army.mil) design language.
+ * Canonical theme stylesheet source.
  *
- * The Hub uses a stark black-on-white layout with minimal decoration.
- * Colors come from Tailwind defaults used in the Hub's React build:
- *   gray-900: #111827   headings, near-black
- *   gray-600: #4b5563   body text
- *   gray-400: #9ca3af   placeholder text
- *   gray-200: #e5e7eb   borders / dividers
- *   gray-900 footer:    #111827 (bg-gray-900)
+ * Run `npm run build:css` to generate
+ * ckanext/cwbi_theme/assets/cwbi-theme.css. Do not edit the generated file.
  */
 
-/* ── Header logo ───────────────────────────────────────────────────── */
+*, ::before, ::after {
+  --tw-border-spacing-x:
+      0;
+  --tw-border-spacing-y:
+      0;
+  --tw-translate-x:
+      0;
+  --tw-translate-y:
+      0;
+  --tw-rotate:
+      0;
+  --tw-skew-x:
+      0;
+  --tw-skew-y:
+      0;
+  --tw-scale-x:
+      1;
+  --tw-scale-y:
+      1;
+  --tw-pan-x:
+       ;
+  --tw-pan-y:
+       ;
+  --tw-pinch-zoom:
+       ;
+  --tw-scroll-snap-strictness:
+      proximity;
+  --tw-gradient-from-position:
+       ;
+  --tw-gradient-via-position:
+       ;
+  --tw-gradient-to-position:
+       ;
+  --tw-ordinal:
+       ;
+  --tw-slashed-zero:
+       ;
+  --tw-numeric-figure:
+       ;
+  --tw-numeric-spacing:
+       ;
+  --tw-numeric-fraction:
+       ;
+  --tw-ring-inset:
+       ;
+  --tw-ring-offset-width:
+      0px;
+  --tw-ring-offset-color:
+      #fff;
+  --tw-ring-color:
+      rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow:
+      0 0 #0000;
+  --tw-ring-shadow:
+      0 0 #0000;
+  --tw-shadow:
+      0 0 #0000;
+  --tw-shadow-colored:
+      0 0 #0000;
+  --tw-blur:
+       ;
+  --tw-brightness:
+       ;
+  --tw-contrast:
+       ;
+  --tw-grayscale:
+       ;
+  --tw-hue-rotate:
+       ;
+  --tw-invert:
+       ;
+  --tw-saturate:
+       ;
+  --tw-sepia:
+       ;
+  --tw-drop-shadow:
+       ;
+  --tw-backdrop-blur:
+       ;
+  --tw-backdrop-brightness:
+       ;
+  --tw-backdrop-contrast:
+       ;
+  --tw-backdrop-grayscale:
+       ;
+  --tw-backdrop-hue-rotate:
+       ;
+  --tw-backdrop-invert:
+       ;
+  --tw-backdrop-opacity:
+       ;
+  --tw-backdrop-saturate:
+       ;
+  --tw-backdrop-sepia:
+       ;
+  --tw-contain-size:
+       ;
+  --tw-contain-layout:
+       ;
+  --tw-contain-paint:
+       ;
+  --tw-contain-style:
+       ;
+}
+
+::backdrop {
+  --tw-border-spacing-x:
+      0;
+  --tw-border-spacing-y:
+      0;
+  --tw-translate-x:
+      0;
+  --tw-translate-y:
+      0;
+  --tw-rotate:
+      0;
+  --tw-skew-x:
+      0;
+  --tw-skew-y:
+      0;
+  --tw-scale-x:
+      1;
+  --tw-scale-y:
+      1;
+  --tw-pan-x:
+       ;
+  --tw-pan-y:
+       ;
+  --tw-pinch-zoom:
+       ;
+  --tw-scroll-snap-strictness:
+      proximity;
+  --tw-gradient-from-position:
+       ;
+  --tw-gradient-via-position:
+       ;
+  --tw-gradient-to-position:
+       ;
+  --tw-ordinal:
+       ;
+  --tw-slashed-zero:
+       ;
+  --tw-numeric-figure:
+       ;
+  --tw-numeric-spacing:
+       ;
+  --tw-numeric-fraction:
+       ;
+  --tw-ring-inset:
+       ;
+  --tw-ring-offset-width:
+      0px;
+  --tw-ring-offset-color:
+      #fff;
+  --tw-ring-color:
+      rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow:
+      0 0 #0000;
+  --tw-ring-shadow:
+      0 0 #0000;
+  --tw-shadow:
+      0 0 #0000;
+  --tw-shadow-colored:
+      0 0 #0000;
+  --tw-blur:
+       ;
+  --tw-brightness:
+       ;
+  --tw-contrast:
+       ;
+  --tw-grayscale:
+       ;
+  --tw-hue-rotate:
+       ;
+  --tw-invert:
+       ;
+  --tw-saturate:
+       ;
+  --tw-sepia:
+       ;
+  --tw-drop-shadow:
+       ;
+  --tw-backdrop-blur:
+       ;
+  --tw-backdrop-brightness:
+       ;
+  --tw-backdrop-contrast:
+       ;
+  --tw-backdrop-grayscale:
+       ;
+  --tw-backdrop-hue-rotate:
+       ;
+  --tw-backdrop-invert:
+       ;
+  --tw-backdrop-opacity:
+       ;
+  --tw-backdrop-saturate:
+       ;
+  --tw-backdrop-sepia:
+       ;
+  --tw-contain-size:
+       ;
+  --tw-contain-layout:
+       ;
+  --tw-contain-paint:
+       ;
+  --tw-contain-style:
+       ;
+}
+
+.account-masthead {
+  border-bottom-width:
+      1px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(229 231 235 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.account-masthead .account ul li a {
+  background-color:
+      transparent;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.account-masthead .account ul li a:hover {
+  background-color:
+      transparent;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
+.masthead {
+  border-bottom-width:
+      1px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(229 231 235 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.masthead .navigation .nav-pills > li > a,
+  .navbar .nav > li > a,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a {
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  font-weight:
+      600;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.masthead .navigation .nav-pills > li > a:hover,
+  .masthead .navigation .nav-pills > li > a:focus,
+  .navbar .nav > li > a:hover,
+  .navbar .nav > li > a:focus,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a:hover,
+  .masthead .main-navbar .navbar-nav > li:not(.active) > a:focus {
+  background-color:
+      transparent;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
+.masthead .navigation .nav-pills > li.active > a,
+  .masthead .navigation .nav-pills > li.active > a:hover {
+  background-color:
+      transparent;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.masthead .section.header-search .search-input-group input {
+  border-width:
+      1px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(229 231 235 / var(--tw-border-opacity, 1));
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.masthead .section.header-search .search-input-group button {
+  border-width:
+      1px;
+  border-left-width:
+      0px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(229 231 235 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.navbar .logo .cwbi-brand,
+  .site-title {
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.site-footer {
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
 
 .cwbi-logo {
-  margin-right: 0.75rem;
-  height: 3rem;
-  width: auto;
-  vertical-align: middle;
+  margin-right:
+      0.75rem;
+  height:
+      3rem;
+  width:
+      auto;
+  vertical-align:
+      middle;
 }
 
 .cwbi-brand {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #111827;
+  display:
+      inline-block;
+  vertical-align:
+      middle;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  font-weight:
+      600;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
 .navbar .logo {
-  display: flex;
-  align-items: center;
-  text-decoration-line: none;
+  display:
+      flex;
+  align-items:
+      center;
+  text-decoration-line:
+      none;
 }
 
 .navbar .logo:hover {
-  text-decoration-line: none;
+  text-decoration-line:
+      none;
 }
 
-/* ── Hero banner — flat image strip, matching CWBI Hub ─────────────── */
-
-.cwbi-hero {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
+.cwbi-home-backdrop {
+  background-size:
+      cover;
+  background-position:
+      center;
+  background-image:
+      linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76)),
+      url('/Homepage_FullSize.jpeg');
 }
 
-.cwbi-hero img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: left top;
-  display: block;
+.cwbi-page-backdrop {
+  background-size:
+      cover;
+  background-position:
+      center;
+  background-image: var(--cwbi-page-image);
 }
-
-/* ── Page heading (below the banner, white bg, bordered bottom) ───── */
 
 .cwbi-page-heading {
-  background-color: #fff;
-  padding: 1.5rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom-width:
+      1px;
+  padding-left:
+      1.5rem;
+  padding-right:
+      1.5rem;
+  padding-top:
+      1.5rem;
+  padding-bottom:
+      1.5rem;
+  background-color: rgba(5, 20, 55, 0.82);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.cwbi-home-heading {
+  background-size:
+      cover;
+  background-position:
+      center;
+  background-image:
+      linear-gradient(rgba(5, 20, 55, 0.82), rgba(5, 20, 55, 0.82)),
+      url('/Header_Homepage.jpg');
 }
 
 .cwbi-page-heading-inner {
-  max-width: 72rem;
-  margin: 0 auto;
+  margin-left:
+      auto;
+  margin-right:
+      auto;
+  max-width:
+      72rem;
 }
 
 .cwbi-page-heading h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #111827;
-  margin: 0 0 0.5rem;
+  margin-bottom:
+      0.5rem;
+  margin-top:
+      0px;
+  font-size:
+      2.25rem;
+  line-height:
+      2.5rem;
+  font-weight:
+      700;
+  letter-spacing:
+      -0.025em;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .cwbi-page-heading p {
-  font-size: 1.125rem;
-  line-height: 2rem;
-  color: #4b5563;
-  margin: 0;
+  margin:
+      0px;
+  font-size:
+      1.125rem;
+  line-height:
+      2rem;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 
-/* ── Search form — minimal underlined input, matching Hub header ───── */
+.cwbi-primary-link {
+  margin-top:
+      1.5rem;
+  display:
+      inline-block;
+  border-width:
+      1px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(255 255 255 / var(--tw-border-opacity, 1));
+  padding-left:
+      1rem;
+  padding-right:
+      1rem;
+  padding-top:
+      0.625rem;
+  padding-bottom:
+      0.625rem;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  font-weight:
+      600;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(255 255 255 / var(--tw-text-opacity, 1));
+  text-decoration-line:
+      none;
+}
+
+.cwbi-primary-link:hover,
+  .cwbi-primary-link:focus {
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
+  text-decoration-line:
+      none;
+}
 
 .cwbi-search-form {
-  display: flex;
-  align-items: center;
-  max-width: 42rem;
-  border-bottom: 2px solid #111827;
-  margin-top: 1.5rem;
+  margin-top:
+      1.5rem;
+  display:
+      flex;
+  max-width:
+      42rem;
+  align-items:
+      center;
+  border-bottom-width:
+      2px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 
 .cwbi-search-form input[type='text'] {
-  flex: 1 1 0%;
-  border: none;
-  padding: 0.5rem 0;
-  font-size: 0.875rem;
-  color: #111827;
-  background: transparent;
-  outline: none;
+  flex:
+      1 1 0%;
+  border-width:
+      0px;
+  background-color:
+      transparent;
+  padding-left:
+      0px;
+  padding-right:
+      0px;
+  padding-top:
+      0.5rem;
+  padding-bottom:
+      0.5rem;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(255 255 255 / var(--tw-text-opacity, 1));
+  outline:
+      2px solid transparent;
+  outline-offset:
+      2px;
+}
+
+.cwbi-search-form input[type='text']::-moz-placeholder {
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .cwbi-search-form input[type='text']::placeholder {
-  color: #9ca3af;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .cwbi-search-form button {
-  cursor: pointer;
-  border: none;
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  background: transparent;
-  color: #111827;
+  cursor:
+      pointer;
+  border-width:
+      0px;
+  background-color:
+      transparent;
+  padding:
+      0.5rem;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  font-weight:
+      600;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .cwbi-search-form button:hover {
-  color: #4b5563;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
-/* ── Content section (white, plain) ───────────────────────────────── */
-
 .cwbi-content-section {
-  background-color: #fff;
-  padding: 1.5rem;
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  padding:
+      1.5rem;
 }
 
 .cwbi-content-inner {
-  max-width: 72rem;
-  margin: 0 auto;
+  margin-left:
+      auto;
+  margin-right:
+      auto;
+  max-width:
+      72rem;
 }
 
-/* ── Feature cards — plain white, light border, no colored headers ── */
-
 .cwbi-cards-section {
-  background-color: #fff;
-  padding: 1.5rem;
+  --tw-bg-opacity:
+      1;
+  background-color:
+      rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  padding:
+      1.5rem;
+}
+
+.cwbi-home-backdrop .cwbi-cards-section {
+  background-color: rgba(255, 255, 255, 0.44);
+}
+
+.cwbi-dataset-backdrop .main {
+  background-color: rgba(255, 255, 255, 0.72);
+  background-image: none;
 }
 
 .cwbi-cards-grid {
-  margin: 0 auto;
-  max-width: 72rem;
-  gap: 1.5rem;
-  display: grid;
+  margin-left:
+      auto;
+  margin-right:
+      auto;
+  display:
+      grid;
+  max-width:
+      72rem;
+  gap:
+      1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .cwbi-card {
-  border: 1px solid #e5e7eb;
-  padding: 1.25rem;
+  display:
+      block;
+  border-width:
+      1px;
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(209 213 219 / var(--tw-border-opacity, 1));
+  padding:
+      1.25rem;
+  text-decoration-line:
+      none;
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+.cwbi-card:hover,
+  .cwbi-card:focus {
+  --tw-border-opacity:
+      1;
+  border-color:
+      rgb(156 163 175 / var(--tw-border-opacity, 1));
+  text-decoration-line:
+      none;
 }
 
 .cwbi-card-title {
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #111827;
+  margin-bottom:
+      0.5rem;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  font-weight:
+      700;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
 .cwbi-card-text {
-  font-size: 0.875rem;
-  line-height: 1.625;
-  color: #4b5563;
+  font-size:
+      0.875rem;
+  line-height:
+      1.25rem;
+  line-height:
+      1.625;
+  --tw-text-opacity:
+      1;
+  color:
+      rgb(75 85 99 / var(--tw-text-opacity, 1));
 }
 
-/* ── CKAN Bootstrap overrides ──────────────────────────────────────── */
-
-/* Account masthead — thin top bar (Log in) */
-.account-masthead {
-  background-color: #fff;
-  border-bottom: 1px solid #e5e7eb;
+.block {
+  display:
+      block;
 }
 
-.account-masthead .account ul li a {
-  background-color: transparent;
-  color: #111827;
-}
+/* CKAN Bootstrap overrides */
 
-.account-masthead .account ul li a:hover {
-  background-color: transparent;
-  color: #4b5563;
-}
-
-/* Main navigation bar — white, matching CWBI Hub header */
-.masthead {
-  background-color: #fff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.masthead .navigation .nav-pills > li > a,
-.navbar .nav > li > a {
-  color: #111827;
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.masthead .navigation .nav-pills > li > a:hover,
-.masthead .navigation .nav-pills > li > a:focus,
-.navbar .nav > li > a:hover,
-.navbar .nav > li > a:focus {
-  color: #4b5563;
-  background-color: transparent;
-}
-
-.masthead .navigation .nav-pills > li.active > a,
-.masthead .navigation .nav-pills > li.active > a:hover {
-  background-color: transparent;
-  color: #111827;
-}
-
-/* Navbar search box */
-.masthead .section.header-search .search-input-group input {
-  border: 1px solid #e5e7eb;
-  color: #111827;
-}
-
-.masthead .section.header-search .search-input-group button {
-  background-color: #fff;
-  color: #111827;
-  border: 1px solid #e5e7eb;
-  border-left: none;
-}
-
-/* Site title / brand text */
-.navbar .logo .cwbi-brand,
-.site-title {
-  color: #111827;
-}
-
-/* Footer — dark, matching CWBI Hub bg-gray-900 */
-.site-footer {
-  background-color: #111827;
-}
-
-/* ── Component classes ─────────────────────────────────────────────── */
+/* Theme components */

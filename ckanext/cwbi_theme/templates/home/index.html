@@ -6,59 +6,74 @@
 {% block actions %}{% endblock %}
 
 {% block content %}
-  {# Banner image — flat strip, matching CWBI Hub #}
-  <section class="cwbi-hero">
-    <img src="/CWBI_Data_header.jpeg" alt="CWBI Data">
-  </section>
-
-  {# Page heading + search — white background, below banner #}
-  <section class="cwbi-page-heading">
-    <div class="cwbi-page-heading-inner">
-      <h1>Data</h1>
-      <p>
-        Data owners and data seekers alike, read on: there are many ways to
-        store, manage, and access CWBI data.
-      </p>
-      <form class="cwbi-search-form" action="/dataset" method="GET">
-        <input
-          type="text"
-          name="q"
-          placeholder="Search data assets..."
-          aria-label="Search data assets"
-        >
-        <button type="submit">&#128269;</button>
-      </form>
-    </div>
-  </section>
-
-  {# Feature cards — plain white, no colored headers #}
-  <section class="cwbi-cards-section">
-    <div class="cwbi-cards-grid">
-
-      <div class="cwbi-card">
-        <div class="cwbi-card-title">Data Discovery</div>
-        <div class="cwbi-card-text">
-          Find and access relevant data assets across CWBI modules to support
-          AI applications and operational decision-making.
-        </div>
+  <div class="cwbi-home-backdrop">
+    <section class="cwbi-page-heading cwbi-home-heading">
+      <div class="cwbi-page-heading-inner">
+        <h1>Data</h1>
+        <p>
+          Data owners and data seekers alike, read on: there are many ways to
+          store, manage, and access CWBI data.
+        </p>
+        <form class="cwbi-search-form" action="{{ h.url_for('dataset.search') }}" method="GET">
+          <input
+            type="text"
+            name="q"
+            placeholder="Search data assets..."
+            aria-label="Search data assets"
+          >
+          <button type="submit">&#128269;</button>
+        </form>
       </div>
+    </section>
 
-      <div class="cwbi-card">
-        <div class="cwbi-card-title">Visibility</div>
-        <div class="cwbi-card-text">
-          A centralized repository where data sources are documented, making
-          it easier to discover and access relevant data efficiently.
-        </div>
+    <section class="cwbi-cards-section">
+      <div class="cwbi-cards-grid">
+        <a class="cwbi-card" href="{{ h.url_for('dataset.search') }}">
+          <div class="cwbi-card-title">Datasets</div>
+          <div class="cwbi-card-text">
+            Search the Civil Works Data Catalog for data assets that are fit
+            for purpose.
+          </div>
+        </a>
+
+        <a class="cwbi-card" href="{{ h.url_for('cwbi_theme.discovery') }}">
+          <div class="cwbi-card-title">Data Discovery</div>
+          <div class="cwbi-card-text">
+            Find and access relevant data assets across CWBI modules to support
+            operational decision-making.
+          </div>
+        </a>
+
+        <a class="cwbi-card" href="{{ h.url_for('cwbi_theme.visibility') }}">
+          <div class="cwbi-card-title">Visibility</div>
+          <div class="cwbi-card-text">
+            A centralized repository where data sources are documented, making
+            it easier to discover and access relevant data efficiently.
+          </div>
+        </a>
+
+        <a class="cwbi-card" href="{{ h.url_for('cwbi_theme.vaultis') }}">
+          <div class="cwbi-card-title">VAULTIS Framework</div>
+          <div class="cwbi-card-text">
+            Supporting the Visibility and Accessibility principles of the
+            VAULTIS framework through systematic data organization.
+          </div>
+        </a>
+
+        <a class="cwbi-card" href="{{ h.url_for('cwbi_theme.business_lines') }}">
+          <div class="cwbi-card-title">Business Lines</div>
+          <div class="cwbi-card-text">
+            Explore data assets supporting Civil Works business lines.
+          </div>
+        </a>
+
+        <a class="cwbi-card" href="{{ h.url_for('cwbi_theme.modules') }}">
+          <div class="cwbi-card-title">Modules</div>
+          <div class="cwbi-card-text">
+            Explore data assets contributed by CWBI modules.
+          </div>
+        </a>
       </div>
-
-      <div class="cwbi-card">
-        <div class="cwbi-card-title">VAULTIS Framework</div>
-        <div class="cwbi-card-text">
-          Supporting the Visibility and Accessibility principles of the
-          VAULTIS framework through systematic data organization.
-        </div>
-      </div>
-
-    </div>
-  </section>
+    </section>
+  </div>
 {% endblock %}
