@@ -3,7 +3,7 @@
 {% block content %}
   <div
     class="cwbi-page-backdrop cwbi-dataset-backdrop"
-    style="--cwbi-page-image: url('/Header_Datasets.jpg')"
+    style="--cwbi-page-image: url('{{ h.url_for_static('/Header_Datasets.jpg') }}')"
   >
     {{ super() }}
   </div>
