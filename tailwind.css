@@ -87,7 +87,7 @@
     @apply bg-cover bg-center;
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76)),
-      url('/Homepage_FullSize.jpeg');
+      var(--cwbi-home-image);
   }
 
   .cwbi-page-backdrop {
@@ -105,7 +105,7 @@
     @apply bg-cover bg-center;
     background-image:
       linear-gradient(rgba(5, 20, 55, 0.82), rgba(5, 20, 55, 0.82)),
-      url('/Header_Homepage.jpg');
+      var(--cwbi-home-header-image);
   }
 
   .cwbi-page-heading-inner {
