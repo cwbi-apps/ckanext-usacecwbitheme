@@ -23,7 +23,7 @@ ckan.plugins = ... cwbi_theme
 npm ci
 npm run build
 python -m pip install build
-python -m build
+python -m build --wheel
 ```
 
 `tailwind.css` is the canonical stylesheet source. The Tailwind build generates
@@ -37,6 +37,16 @@ templates. `tailwind.config.cjs` is the only active Tailwind configuration.
 The Python distribution includes the generated CSS, templates, and graphical
 assets.
 
-## Integration Test
+After that, stage the wheel into CKAN:
 
-The sibling `ckan-ext` repository provides the local CKAN integration environment.
+```powershell
+Copy-Item dist\ckanext_cwbi_theme-0.1.0-py3-none-any.whl ..\cwbi-datacatalog-ckan\ckan\local-wheels\ -Force
+```
+
+## Unit Tests
+
+Run the local unit test suite from this repository:
+
+```bash
+python -m unittest discover -s tests
+```

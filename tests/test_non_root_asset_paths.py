@@ -31,6 +31,8 @@ URL_REFERENCE_RE = re.compile(
         \b(?:href|src)=["'](?P<html>[^"']+)["']
         |
         url\(["']?(?P<css>[^"')]+)["']?\)
+        |
+        url_for_static\(["'](?P<static>[^"']+)["']
     )
     """,
     re.VERBOSE,
@@ -45,7 +47,7 @@ def is_theme_public_asset(reference):
 def references_in(path):
     text = path.read_text(encoding="utf-8")
     for match in URL_REFERENCE_RE.finditer(text):
-        yield match.group("html") or match.group("css")
+        yield match.group("html") or match.group("css") or match.group("static")
 
 
 class NonRootAssetPathTests(unittest.TestCase):
@@ -73,6 +75,22 @@ class NonRootAssetPathTests(unittest.TestCase):
                     + offenders
                 )
             )
+
+    def test_theme_links_block_does_not_inherit_default_ckan_favicon(self):
+        base_template = REPO_ROOT / "ckanext/cwbi_theme/templates/base.html"
+        text = base_template.read_text(encoding="utf-8")
+        links_block = re.search(
+            r"{%\s*block\s+links\s*%}(?P<body>.*?){%\s*endblock\s*%}",
+            text,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(links_block, "base.html must define a links block")
+        self.assertNotIn(
+            "super()",
+            links_block.group("body"),
+            "The inherited CKAN links block emits /images/favicon.ico, which "
+            "escapes non-root deployments such as /catalog.",
+        )
 
 
 if __name__ == "__main__":
