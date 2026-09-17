@@ -717,4 +717,10 @@
 
 /* CKAN Bootstrap overrides */
 
+.table td,
+.table th {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 /* Theme components */

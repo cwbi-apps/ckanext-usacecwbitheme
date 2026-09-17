@@ -10,6 +10,12 @@
 @tailwind utilities;
 
 /* CKAN Bootstrap overrides */
+.table td,
+.table th {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 @layer base {
   .account-masthead {
     @apply border-b border-gray-200 bg-white;
