@@ -1,8 +1,23 @@
 {% ckan_extends %}
 
+{% block header_lang %}
+{% endblock %}
+
 {% block header_logo %}
   <a class="logo" href="{{ h.url_for('home.index') }}">
-    <img src="{{ h.url_for_static('/CWBI_Logo.png') }}" alt="CWBI Logo" class="cwbi-logo">
-    <span class="cwbi-brand">Civil Works Data Catalog</span>
+    <img src="{{ h.url_for_static('usace-logo-color.svg') }}" alt="USACE Logo" class="cwbi-logo">
+    <span class="cwbi-brand">USACE Civil Works Data Catalog</span>
   </a>
+{% endblock %}
+{% block header_site_navigation_tabs %}
+  {% set org_type = h.default_group_type('organization') %}
+  {% set group_type = h.default_group_type('group') %}
+
+  {{ h.build_nav_main(
+    (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'), ["dataset", "resource"]),
+    (org_type ~ '.index',
+      h.humanize_entity_type('organization', org_type, 'main nav') or _('Organizations'), ['organization']),
+    (group_type ~ '.index',
+      h.humanize_entity_type('group', group_type, 'main nav') or _('Groups'), ['group']),
+    ('home.about', _('About')) ) }}
 {% endblock %}
