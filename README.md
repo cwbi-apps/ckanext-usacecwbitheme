@@ -2,6 +2,7 @@
 
 Installable CKAN extension providing Civil Works Business Intelligence branding,
 page-specific artwork, and landing-page routes.
+The sibling `ckan-ext` repository provides the local CKAN integration environment.
 
 ## Install
 
@@ -43,10 +44,18 @@ After that, stage the wheel into CKAN:
 Copy-Item dist\ckanext_cwbi_theme-0.1.0-py3-none-any.whl ..\cwbi-datacatalog-ckan\ckan\local-wheels\ -Force
 ```
 
+cp dist/ckanext_cwbi_theme-0.1.0-py3-none-any.whl ../cwbi-datacatalog-ckan/ckan/local-wheels/
+
+python3 -m venv local
+    source local/bin/activate
+  npm ci
+npm run build
+python3 -m pip install build
+python3 -m build --wheel
 ## Unit Tests
 
 Run the local unit test suite from this repository:
 
 ```bash
-python -m unittest discover -s tests
+python3 -m unittest discover -s tests
 ```
