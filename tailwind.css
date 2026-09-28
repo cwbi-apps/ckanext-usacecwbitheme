@@ -16,6 +16,26 @@
   word-break: break-word;
 }
 
+/* CKAN renders .main and .site-footer as direct children of body. */
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > .main {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex-shrink: 0;
+}
+
 @layer base {
   .account-masthead {
     @apply border-b border-gray-200 bg-white;
