@@ -17,6 +17,8 @@ TEMPLATE_BACKDROPS = {
         "cwbi-home-backdrop",
     REPO_ROOT / "ckanext/cwbi_theme/templates/cwbi_theme/landing.html":
         "cwbi-page-backdrop",
+    REPO_ROOT / "ckanext/cwbi_theme/templates/package/search.html":
+        "cwbi-page-backdrop cwbi-dataset-backdrop",
 }
 
 
@@ -59,7 +61,7 @@ class StickyFooterStylesTests(unittest.TestCase):
             self.assertIsNotNone(content_block, str(template.relative_to(REPO_ROOT)))
             self.assertRegex(
                 content_block.group("body"),
-                r'<div\s+class="main">\s*<div\s+class="{}"'.format(
+                r'<div\s+class="main cwbi-full-page-main">\s*<div\s+class="{}"'.format(
                     backdrop_class
                 ),
                 str(template.relative_to(REPO_ROOT)),
@@ -96,6 +98,40 @@ class StickyFooterStylesTests(unittest.TestCase):
                 r"\.site-footer\s*\{[^}]*flex-shrink:\s*0;",
                 label,
             )
+
+    def test_backdrop_growth_and_dataset_background_contract_is_present(self):
+        source = (REPO_ROOT / "tailwind.css").read_text(encoding="utf-8")
+        self.assertRegex(
+            source,
+            r"\.cwbi-full-page-main\s*\{[^}]*@apply\s+flex\s+flex-col;",
+        )
+        self.assertRegex(
+            source,
+            r"\.cwbi-full-page-main\s*>\s*\.cwbi-home-backdrop,\s*"
+            r"\.cwbi-full-page-main\s*>\s*\.cwbi-page-backdrop\s*\{"
+            r"[^}]*flex:\s*1 0 auto;",
+        )
+        self.assertRegex(
+            source,
+            r"\.cwbi-dataset-backdrop\s*\{[^}]*"
+            r"background-repeat:\s*no-repeat;[^}]*"
+            r"background-size:\s*100% auto;",
+        )
+
+        generated = (
+            REPO_ROOT / "ckanext/cwbi_theme/assets/cwbi-theme.css"
+        ).read_text(encoding="utf-8")
+        self.assertRegex(
+            generated,
+            r"\.cwbi-full-page-main\s*\{[^}]*display:\s*flex;[^}]*"
+            r"flex-direction:\s*column;",
+        )
+        self.assertRegex(
+            generated,
+            r"\.cwbi-dataset-backdrop\s*\{[^}]*"
+            r"background-repeat:\s*no-repeat;[^}]*"
+            r"background-size:\s*100% auto;",
+        )
 
 
 if __name__ == "__main__":
