@@ -109,6 +109,15 @@ body > .main {
     @apply no-underline;
   }
 
+  .cwbi-full-page-main {
+    @apply flex flex-col;
+  }
+
+  .cwbi-full-page-main > .cwbi-home-backdrop,
+  .cwbi-full-page-main > .cwbi-page-backdrop {
+    flex: 1 0 auto;
+  }
+
   .cwbi-home-backdrop {
     @apply bg-cover bg-center;
     background-image:
@@ -194,6 +203,12 @@ body > .main {
   .cwbi-dataset-backdrop .main {
     background-color: rgba(255, 255, 255, 0.72);
     background-image: none;
+  }
+
+  .cwbi-dataset-backdrop {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
   }
 
   .cwbi-cards-grid {
