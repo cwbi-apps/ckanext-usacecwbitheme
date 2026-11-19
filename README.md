@@ -2,6 +2,7 @@
 
 Installable CKAN extension providing Civil Works Business Intelligence branding,
 page-specific artwork, and landing-page routes.
+The sibling `ckan-ext` repository provides the local CKAN integration environment.
 
 ## Install
 

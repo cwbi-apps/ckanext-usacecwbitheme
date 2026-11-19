@@ -6,28 +6,29 @@
 {% block actions %}{% endblock %}
 
 {% block content %}
-  <div
-    class="cwbi-home-backdrop"
-    style="--cwbi-home-image: url('{{ h.url_for_static('Homepage_FullSize.jpeg') }}'); --cwbi-home-header-image: url('{{ h.url_for_static('Header_Homepage.jpg') }}')"
-  >
-    <section class="cwbi-page-heading cwbi-home-heading">
-      <div class="cwbi-page-heading-inner">
-        <h1>Data</h1>
-        <p>
-          Data owners and data seekers alike, read on: there are many ways to
-          store, manage, and access CWBI data.
-        </p>
-        <form class="cwbi-search-form" action="{{ h.url_for('dataset.search') }}" method="GET">
-          <input
-            type="text"
-            name="q"
-            placeholder="Search data assets..."
-            aria-label="Search data assets"
-          >
-          <button type="submit">&#128269;</button>
-        </form>
-      </div>
-    </section>
+  <div class="main cwbi-full-page-main">
+    <div
+      class="cwbi-home-backdrop"
+      style="--cwbi-home-image: url('{{ h.url_for_static('Homepage_FullSize.jpeg') }}'); --cwbi-home-header-image: url('{{ h.url_for_static('Header_Homepage.jpg') }}')"
+    >
+      <section class="cwbi-page-heading cwbi-home-heading">
+        <div class="cwbi-page-heading-inner">
+          <h1>Data</h1>
+          <p>
+            Data owners and data seekers alike, read on: there are many ways to
+            store, manage, and access CWBI data.
+          </p>
+          <form class="cwbi-search-form" action="{{ h.url_for('dataset.search') }}" method="GET">
+            <input
+              type="text"
+              name="q"
+              placeholder="Search data assets..."
+              aria-label="Search data assets"
+            >
+            <button type="submit">&#128269;</button>
+          </form>
+        </div>
+      </section>
 
     <section class="cwbi-cards-section">
       <div class="cwbi-cards-grid">
@@ -78,5 +79,6 @@
         </a>
       </div>
     </section>
+  </div>
   </div>
 {% endblock %}
