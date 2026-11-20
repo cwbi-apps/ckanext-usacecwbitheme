@@ -26,6 +26,15 @@ npm run build
 python -m pip install build
 python -m build --wheel
 ```
+ ### Using local env
+```bash
+python3 -m venv local
+    source local/bin/activate
+  npm ci
+npm run build
+python3 -m pip install build
+python3 -m build --wheel
+```
 
 `tailwind.css` is the canonical stylesheet source. The Tailwind build generates
 `ckanext/cwbi_theme/assets/cwbi-theme.css`, which CKAN loads at runtime. Do not
@@ -44,14 +53,10 @@ After that, stage the wheel into CKAN:
 Copy-Item dist\ckanext_cwbi_theme-0.1.0-py3-none-any.whl ..\cwbi-datacatalog-ckan\ckan\local-wheels\ -Force
 ```
 
+```bash
 cp dist/ckanext_cwbi_theme-0.1.0-py3-none-any.whl ../cwbi-datacatalog-ckan/ckan/local-wheels/
+```
 
-python3 -m venv local
-    source local/bin/activate
-  npm ci
-npm run build
-python3 -m pip install build
-python3 -m build --wheel
 ## Unit Tests
 
 Run the local unit test suite from this repository:
