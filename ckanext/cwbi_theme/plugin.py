@@ -105,6 +105,16 @@ def nav_link(next_helper, *args, **kwargs):
     return next_helper(*args, **kwargs)
 
 
+def group_create(context, data_dict=None):
+    user = context.get("auth_user_obj")
+    if user and user.sysadmin:
+        return {"success": True}
+    return {
+        "success": False,
+        "msg": toolkit._("Only sysadmins can create groups"),
+    }
+
+
 blueprint = Blueprint("cwbi_theme", __name__)
 
 
@@ -156,6 +166,7 @@ def business_lines():
 class CwbiThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.ITemplateHelpers)
 
     def update_config(self, config):
@@ -187,3 +198,6 @@ class CwbiThemePlugin(plugins.SingletonPlugin):
             "build_nav_icon": build_nav_icon,
             "nav_link": nav_link,
         }
+
+    def get_auth_functions(self):
+        return {"group_create": group_create}

@@ -11,12 +11,24 @@
 {% endblock %}
 {% block header_site_navigation_tabs %}
   {% set group_type = h.default_group_type('group') %}
+  {% set dataset_tab = (
+    dataset_type ~ '.search',
+    h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'),
+    ['dataset', 'resource']
+  ) %}
+  {% set modules_tab = (
+    'cwbi_theme_modules.index', _('Modules'), ['organization', 'cwbi_theme_modules']
+  ) %}
+  {% set groups_tab = (
+    group_type ~ '.index',
+    h.humanize_entity_type('group', group_type, 'main nav') or _('Groups'),
+    ['group']
+  ) %}
+  {% set about_tab = ('home.about', _('About')) %}
 
-  {{ h.build_nav_main(
-    (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'), ["dataset", "resource"]),
-    ('cwbi_theme_modules.index',
-      _('Modules'), ['organization', 'cwbi_theme_modules']),
-    (group_type ~ '.index',
-      h.humanize_entity_type('group', group_type, 'main nav') or _('Groups'), ['group']),
-    ('home.about', _('About')) ) }}
+  {% if h.check_access('group_create') %}
+    {{ h.build_nav_main(dataset_tab, modules_tab, groups_tab, about_tab) }}
+  {% else %}
+    {{ h.build_nav_main(dataset_tab, modules_tab, about_tab) }}
+  {% endif %}
 {% endblock %}

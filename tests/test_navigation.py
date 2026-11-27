@@ -21,6 +21,20 @@ class NavigationTests(unittest.TestCase):
         self.assertIn("_('Modules')", content)
         self.assertNotIn("_('Organizations')", content)
 
+    def test_group_navigation_requires_group_creation_access(self):
+        content = HEADER_TEMPLATE.read_text(encoding="utf-8")
+        self.assertIn("h.check_access('group_create')", content)
+        self.assertIn(
+            "build_nav_main(dataset_tab, modules_tab, groups_tab",
+            content,
+        )
+        self.assertIn("build_nav_main(dataset_tab, modules_tab, about_tab)", content)
+
+        plugin = PLUGIN.read_text(encoding="utf-8")
+        self.assertIn("plugins.implements(plugins.IAuthFunctions)", plugin)
+        self.assertIn('"group_create": group_create', plugin)
+        self.assertIn("user and user.sysadmin", plugin)
+
     def test_organization_index_uses_module_labels_and_search_results(self):
         content = ORGANIZATION_TEMPLATE.read_text(encoding="utf-8")
         for label in (
