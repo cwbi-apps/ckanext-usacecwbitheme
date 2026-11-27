@@ -2,7 +2,7 @@ import os
 import re
 import unittest
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 from urllib.request import urlopen
 
 
@@ -31,13 +31,22 @@ class LiveCkanTemplateRenderTests(unittest.TestCase):
         except URLError as error:
             self.fail("Could not reach CKAN at {}: {}".format(url, error.reason))
 
+    @property
+    def module_path(self):
+        return urlparse(urljoin(self.base_url, "modules/")).path
+
     def test_module_index_renders_module_labels(self):
         html = self.render_page("modules/")
         self.assertIn("What are Modules?", html)
         self.assertIn("Search modules...", html)
         self.assertNotIn("Organizations", html)
-        self.assertIn('href="/modules/"', html)
-        self.assertNotIn('href="/organization/', html)
+        self.assertIn('href="{}"'.format(self.module_path), html)
+        self.assertNotIn(
+            'href="{}"'.format(
+                urlparse(urljoin(self.base_url, "organization/")).path
+            ),
+            html,
+        )
 
     def test_organization_index_redirects_to_modules(self):
         url = urljoin(self.base_url, "organization/")
@@ -54,8 +63,13 @@ class LiveCkanTemplateRenderTests(unittest.TestCase):
         html = self.render_page("dataset/")
         self.assertIn("Modules", html)
         self.assertNotIn("Organizations", html)
-        self.assertIn('href="/modules/"', html)
-        self.assertNotIn('href="/organization/', html)
+        self.assertIn('href="{}"'.format(self.module_path), html)
+        self.assertNotIn(
+            'href="{}"'.format(
+                urlparse(urljoin(self.base_url, "organization/")).path
+            ),
+            html,
+        )
 
     def test_homepage_cards_render_without_links(self):
         html = self.render_page("")
@@ -88,7 +102,7 @@ class LiveCkanTemplateRenderTests(unittest.TestCase):
             "GitHub Enterprise",
         ):
             self.assertIn(label, html)
-        self.assertIn('href="/modules"', html)
+        self.assertIn('href="{}"'.format(self.module_path.rstrip("/")), html)
 
 
 if __name__ == "__main__":

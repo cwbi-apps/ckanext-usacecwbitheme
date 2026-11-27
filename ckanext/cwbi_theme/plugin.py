@@ -119,7 +119,8 @@ def redirect_organization_routes():
     ):
         return None
 
-    target = script_root + "/modules" + route_path[len("/organization") :]
+    module_index_url = toolkit.url_for("cwbi_theme_modules.index")
+    target = module_index_url.rstrip("/") + route_path[len("/organization") :]
     if request.query_string:
         target += "?" + request.query_string.decode("latin-1")
     return redirect(target, code=308)

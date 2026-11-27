@@ -58,6 +58,10 @@ class NavigationTests(unittest.TestCase):
         self.assertIn('"group_type": "organization"', plugin)
         self.assertIn('"is_organization": True', plugin)
         self.assertIn('startswith("organization.")', plugin)
+        self.assertIn(
+            'toolkit.url_for("cwbi_theme_modules.index")',
+            plugin,
+        )
         self.assertIn('return redirect(target, code=308)', plugin)
         self.assertIn('def build_nav_main(next_helper, *args):', plugin)
         self.assertIn('"build_nav": build_nav', plugin)
