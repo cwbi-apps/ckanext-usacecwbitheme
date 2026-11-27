@@ -12,7 +12,9 @@ services:
       solr:
         condition: service_healthy
     environment:
-      CKAN_SITE_URL: http://localhost:5001
+      # Keep site_url pathless; root_path already adds /catalog to route URLs.
+      CKAN_SITE_URL: https://dev2.crrel.mil
+      CKAN__ROOT_PATH: /catalog/{{LANG}}
       CKAN_SQLALCHEMY_URL: postgresql://ckan@db/ckan
       CKAN_SOLR_URL: http://solr:8983/solr/ckan
       CKAN_REDIS_URL: redis://redis:6379/1
@@ -22,7 +24,7 @@ services:
       CKAN_SYSADMIN_EMAIL: ${CKAN_SYSADMIN_EMAIL:-ckan_admin@example.com}
       CKAN__PLUGINS: envvars cwbi_theme
     ports:
-      - "127.0.0.1:5001:5000"
+      - "127.0.0.1:5000:5000"
     volumes:
       - .:/srv/app/src_extensions/ckanext-usacecwbitheme
       - ckan_storage:/var/lib/ckan
