@@ -1,6 +1,6 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-from flask import Blueprint
+from flask import Blueprint, redirect, request
 
 
 LANDING_PAGES = {
@@ -33,15 +33,96 @@ LANDING_PAGES = {
         "description": "Explore data assets supporting Civil Works business lines.",
         "banner": "Header_BusinessLines.jpg",
     },
-    "modules": {
-        "title": "Modules",
-        "description": "Explore data assets contributed by CWBI modules.",
-        "banner": "Header_Modules.jpg",
-    },
 }
 
 
+@toolkit.chained_helper
+def humanize_entity_type(next_helper, entity_type, object_type, purpose):
+    if entity_type == "organization":
+        labels = {
+            "default label": toolkit._("Module"),
+            "no label": toolkit._("No Module"),
+            "add link": toolkit._("Add Module"),
+            "facet label": toolkit._("Modules"),
+            "search placeholder": toolkit._("Search modules..."),
+            "no description": toolkit._(
+                "There is no description for this Module"
+            ),
+        }
+        return labels.get(purpose, toolkit._("Modules"))
+    return next_helper(entity_type, object_type, purpose)
+
+
+@toolkit.chained_helper
+def url_for(next_helper, *args, **kwargs):
+    args, kwargs = _use_module_endpoint(args, kwargs)
+    return next_helper(*args, **kwargs)
+
+
+def _module_endpoint(endpoint):
+    if isinstance(endpoint, str) and endpoint.startswith("organization."):
+        return "cwbi_theme_modules." + endpoint.split(".", 1)[1]
+    return endpoint
+
+
+def _use_module_endpoint(args, kwargs):
+    endpoint = args[0] if args else kwargs.get("endpoint")
+    module_endpoint = _module_endpoint(endpoint)
+    if module_endpoint != endpoint:
+        if args:
+            args = (module_endpoint, *args[1:])
+        else:
+            kwargs["endpoint"] = module_endpoint
+    return args, kwargs
+
+
+@toolkit.chained_helper
+def build_nav_main(next_helper, *args):
+    nav_items = []
+    for item in args:
+        if item and isinstance(item[0], str):
+            item, _ = _use_module_endpoint(item, {})
+        nav_items.append(item)
+    return next_helper(*nav_items)
+
+
+@toolkit.chained_helper
+def build_nav(next_helper, *args, **kwargs):
+    args, kwargs = _use_module_endpoint(args, kwargs)
+    return next_helper(*args, **kwargs)
+
+
+@toolkit.chained_helper
+def build_nav_icon(next_helper, *args, **kwargs):
+    args, kwargs = _use_module_endpoint(args, kwargs)
+    return next_helper(*args, **kwargs)
+
+
+@toolkit.chained_helper
+def nav_link(next_helper, *args, **kwargs):
+    if "named_route" in kwargs:
+        kwargs["named_route"] = _module_endpoint(kwargs["named_route"])
+    return next_helper(*args, **kwargs)
+
+
 blueprint = Blueprint("cwbi_theme", __name__)
+
+
+@blueprint.before_app_request
+def redirect_organization_routes():
+    script_root = request.script_root.rstrip("/")
+    route_path = request.path
+    if script_root and route_path.startswith(script_root + "/"):
+        route_path = route_path[len(script_root) :]
+    if route_path != "/organization" and not route_path.startswith(
+        "/organization/"
+    ):
+        return None
+
+    target = script_root + "/modules" + route_path[len("/organization") :]
+    if request.query_string:
+        target += "?" + request.query_string.decode("latin-1")
+    return redirect(target, code=308)
 
 
 def _render_landing_page(page_name):
@@ -71,14 +152,10 @@ def business_lines():
     return _render_landing_page("business-lines")
 
 
-@blueprint.route("/modules")
-def modules():
-    return _render_landing_page("modules")
-
-
 class CwbiThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.ITemplateHelpers)
 
     def update_config(self, config):
         toolkit.add_template_directory(config, "templates")
@@ -86,4 +163,26 @@ class CwbiThemePlugin(plugins.SingletonPlugin):
         toolkit.add_resource("assets", "cwbi_theme")
 
     def get_blueprint(self):
-        return blueprint
+        from ckan.views.group import register_group_plugin_rules
+
+        modules_blueprint = Blueprint(
+            "cwbi_theme_modules",
+            __name__,
+            url_prefix="/modules",
+            url_defaults={
+                "group_type": "organization",
+                "is_organization": True,
+            },
+        )
+        register_group_plugin_rules(modules_blueprint)
+        return [blueprint, modules_blueprint]
+
+    def get_helpers(self):
+        return {
+            "humanize_entity_type": humanize_entity_type,
+            "url_for": url_for,
+            "build_nav_main": build_nav_main,
+            "build_nav": build_nav,
+            "build_nav_icon": build_nav_icon,
+            "nav_link": nav_link,
+        }

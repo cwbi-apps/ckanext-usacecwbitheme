@@ -23,32 +23,47 @@ TEMPLATE_BACKDROPS = {
 
 
 class StickyFooterStylesTests(unittest.TestCase):
-    def test_home_panels_retain_navigation_links(self):
+    def test_home_cards_are_not_navigation_links(self):
         content = (
             REPO_ROOT / "ckanext/cwbi_theme/templates/home/index.html"
         ).read_text(encoding="utf-8")
-        for route in (
-            "dataset.search",
-            "cwbi_theme.discovery",
-            "cwbi_theme.visibility",
-            "cwbi_theme.vaultis",
-            "cwbi_theme.business_lines",
-            "cwbi_theme.modules",
-        ):
-            self.assertIn(
-                "h.url_for('{}')".format(route),
-                content,
-                route,
-            )
+        cards = re.search(
+            r'<section class="cwbi-cards-section">(?P<body>.*?)</section>',
+            content,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(cards)
+        card_content = cards.group("body")
+        self.assertEqual(6, card_content.count('<div class="cwbi-card">'))
+        self.assertNotRegex(card_content, r"<a\b")
+        self.assertNotIn("href=", card_content)
 
-    def test_footer_inherits_ckan_content_blocks(self):
+    def test_footer_exposes_cwbi_navigation_and_static_logo(self):
         content = (
             REPO_ROOT / "ckanext/cwbi_theme/templates/footer.html"
         ).read_text(encoding="utf-8")
-        self.assertNotIn("{% block footer_links %}", content)
-        self.assertNotIn("{% block footer_links_ckan %}", content)
-        self.assertNotIn("{% block footer_attribution %}", content)
-        self.assertNotIn("{% block footer_lang %}", content)
+        self.assertIn("{% block footer_content %}", content)
+        self.assertIn("h.url_for_static('CWBI_Logo.png')", content)
+        self.assertIn('class="h-16 w-16 mx-auto lg:mx-0"', content)
+        self.assertNotIn("xl:max-h-96", content)
+        self.assertIn("list-none space-y-0 leading-tight", content)
+        self.assertNotIn("mt-10", content)
+        self.assertIn("lg:items-start", content)
+        self.assertEqual(3, content.count('class="mt-4 lg:!mt-0"'))
+        heading_classes = re.findall(r'<h3 class="([^"]+)"', content)
+        self.assertEqual(3, len(heading_classes))
+        self.assertEqual(1, len(set(heading_classes)))
+        for label in (
+            "CWBI Program",
+            "Communications",
+            "Technical Resources",
+            "About CWBI",
+            "CWBI Modules",
+            "Situation Reports",
+            "Developer Documentation",
+            "GitHub Enterprise",
+        ):
+            self.assertIn(label, content)
 
     def test_custom_page_templates_restore_ckan_main_wrapper(self):
         for template, backdrop_class in TEMPLATE_BACKDROPS.items():

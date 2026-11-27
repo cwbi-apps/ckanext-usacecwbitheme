@@ -1,9 +1,44 @@
-{% ckan_extends %} 
-{% block footer_links %} 
-{% endblock %} 
-{% block footer_links_ckan %} 
-{% endblock %} 
-{% block footer_attribution %}
-{% endblock %}
-{% block footer_lang %} 
+{% ckan_extends %}
+
+{% block footer_content %}
+  <div class="xl:grid xl:grid-cols-4 xl:gap-8 lg:grid lg:grid-cols-4 lg:gap-8 lg:items-start">
+    <div>
+      <img
+        class="h-16 w-16 mx-auto lg:mx-0"
+        alt="CWBI"
+        src="{{ h.url_for_static('CWBI_Logo.png') }}"
+      >
+      <p class="text-sm leading-5 text-white mt-1 mb-2">
+        Civil Works <br>Business Intelligence
+      </p>
+    </div>
+    <div class="mt-4 lg:!mt-0">
+      <h3 class="mt-0 mb-1 text-sm font-semibold leading-tight text-white">
+        {{ _('Data Related Links') }}
+      </h3>
+      <ul role="list" class="mt-1 mb-0 list-none space-y-0 leading-tight">
+        <li><a href="https://data.sec.usace.army.mil/viewer/" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('CWBI Ontology Viewer') }}</a></li>
+        <li><a href="https://vantage.army.mil" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('Army Vantage') }}</a></li>       
+      </ul>
+    </div>
+    <div class="mt-4 lg:!mt-0">
+      <h3 class="mt-0 mb-1 text-sm font-semibold leading-tight text-white">
+        {{ _('CWBI Program') }}
+      </h3>
+      <ul role="list" class="mt-1 mb-0 list-none space-y-0 leading-tight">
+        <li><a href="https://cwbi.sec.usace.army.mil/about" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('About CWBI') }}</a></li>
+        <li><a href="https://cwbi.sec.usace.army.mil/modules" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('CWBI Modules') }}</a></li>
+        <li><a href="https://cwbi.sec.usace.army.mil/data" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('Data') }}</a></li>
+      </ul>
+    </div>    
+    <div class="mt-4 lg:!mt-0">
+      <h3 class="mt-0 mb-1 text-sm font-semibold leading-tight text-white">
+        {{ _('Technical Resources') }}
+      </h3>
+      <ul role="list" class="mt-1 mb-0 list-none space-y-0 leading-tight">
+        <li><a href="https://cwbi.sec.usace.army.mil/data-jobs" target="_self" rel="noreferrer" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('Data Load Documentation') }}</a></li>
+        <li><a href="https://jira.il2.dso.mil/browse/CWBI-31218" target="_self" rel="noreferrer" class="text-sm leading-tight text-gray-300 hover:!text-white">{{ _('Data Repository Connection Requests') }}</a></li>
+      </ul>
+    </div>
+  </div>
 {% endblock %}

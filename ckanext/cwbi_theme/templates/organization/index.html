@@ -1,0 +1,49 @@
+{% ckan_extends %}
+
+{% block subtitle %}{{ _('Modules') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">
+    <a href="{{ h.url_for('cwbi_theme_modules.index') }}">{{ _('Modules') }}</a>
+  </li>
+{% endblock %}
+
+{% block content_action %}
+  {% if h.check_access('organization_create') %}
+    {% link_for _('Add Module'), named_route='cwbi_theme_modules.new', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+{% endblock %}
+
+{% block page_heading %}{{ _('Modules') }}{% endblock %}
+
+{% block organizations_search_form %}
+  {% snippet 'snippets/search_form.html', form_id='organization-search-form', type='module', query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=_('Search modules...'), show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
+{% endblock %}
+
+{% block organizations_list %}
+  {% if page.items or request.args %}
+    {% if page.items %}
+      {% snippet "organization/snippets/organization_list.html", organizations=page.items %}
+    {% endif %}
+  {% else %}
+    <p class="empty">
+      {{ _('There are currently no Modules for this site') }}.
+    </p>
+  {% endif %}
+{% endblock %}
+
+{% block secondary_content %}
+  <div class="module module-narrow module-shallow">
+    <div class="module-group">
+      <h2 class="module-heading">
+        <i class="fa fa-info-circle"></i>
+        {{ _('What are Modules?') }}
+      </h2>
+      <div class="module-content">
+        <p>
+          {{ _('Modules are used to create, manage and publish collections of datasets. Users can have different roles within a Module, depending on their level of authorisation to create, edit and publish.') }}
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
