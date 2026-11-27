@@ -1,0 +1,71 @@
+services:
+  ckan:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.ckan
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      solr:
+        condition: service_healthy
+    environment:
+      CKAN_SITE_URL: http://localhost:5001
+      CKAN_SQLALCHEMY_URL: postgresql://ckan@db/ckan
+      CKAN_SOLR_URL: http://solr:8983/solr/ckan
+      CKAN_REDIS_URL: redis://redis:6379/1
+      CKAN_STORAGE_PATH: /var/lib/ckan
+      CKAN_SYSADMIN_NAME: ${CKAN_SYSADMIN_NAME:-ckan_admin}
+      CKAN_SYSADMIN_PASSWORD: ${CKAN_SYSADMIN_PASSWORD:-test1234}
+      CKAN_SYSADMIN_EMAIL: ${CKAN_SYSADMIN_EMAIL:-ckan_admin@example.com}
+      CKAN__PLUGINS: envvars cwbi_theme
+    ports:
+      - "127.0.0.1:5001:5000"
+    volumes:
+      - .:/srv/app/src_extensions/ckanext-usacecwbitheme
+      - ckan_storage:/var/lib/ckan
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5000/api/3/action/status_show"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ckan
+      POSTGRES_USER: ckan
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ckan -d ckan"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  solr:
+    platform: linux/amd64
+    image: ckan/ckan-solr:2.12-solr9
+    volumes:
+      - solr_data:/var/solr
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  ckan_storage:
+  pg_data:
+  solr_data:

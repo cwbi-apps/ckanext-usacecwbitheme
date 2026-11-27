@@ -11,6 +11,7 @@ setup(
             "public/*",
             "templates/*",
             "templates/*/*",
+            "templates/*/*/*",
         ],
     },
     entry_points={

@@ -1,0 +1,12 @@
+FROM ckan/ckan-dev:2.12
+
+USER root
+WORKDIR /srv/app/src_extensions/ckanext-usacecwbitheme
+
+COPY --chown=ckan:ckan-sys . .
+RUN pip install --no-build-isolation -e .
+
+WORKDIR /srv/app
+RUN chown ckan:ckan-sys /srv/app/ckan.ini /srv/app/src/ckan/test-core.ini
+
+USER ckan
